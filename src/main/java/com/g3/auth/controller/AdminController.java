@@ -92,7 +92,6 @@ public class AdminController {
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 			return ResponseEntity.badRequest().build();
 		}
-		System.out.println("token " + token);
 		token = token.substring(7, token.length());
 
 //		Gets user Id
@@ -109,7 +108,6 @@ public class AdminController {
 		if (authentication == null) {
 			return ResponseEntity.badRequest().build();
 		}
-		System.out.println(authentication);
 		return ResponseEntity.ok(authentication);
 
 	}
