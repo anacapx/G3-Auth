@@ -85,13 +85,13 @@ public class AdminController {
 		}	
 	}
 	
-	@GetMapping("/validate")
+	@GetMapping("validate")
 	public ResponseEntity<?> validateToken(HttpServletRequest request) {
 		String token = request.getHeader("Authorization");
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 			return ResponseEntity.badRequest().build();
 		}
-
+		System.out.println("token " + token);
 		token = token.substring(7, token.length());
 
 //		Gets user Id
