@@ -1,5 +1,8 @@
 package com.g3.auth.controller.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.g3.auth.model.Admin;
@@ -8,8 +11,13 @@ import com.g3.auth.repository.ProfileRepository;
 
 public class SignUpForm {
 
+	@NotNull @NotEmpty
 	private String name;
+	
+	@NotNull @NotEmpty
 	private String email;
+	
+	@NotNull @NotEmpty
 	private String password;
 	
 	public SignUpForm(String name, String email, String password) {

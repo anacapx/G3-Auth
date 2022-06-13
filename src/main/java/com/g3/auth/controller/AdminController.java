@@ -3,6 +3,7 @@ package com.g3.auth.controller;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,7 +63,7 @@ public class AdminController {
 	}
 
 	@PostMapping("admin")
-	public ResponseEntity<?> signUp(@RequestBody SignUpForm form) {
+	public ResponseEntity<?> signUp(@RequestBody @Valid SignUpForm form) {
 
 		Optional<Admin> adminByEmail = adminRepository.findByEmail(form.getEmail());
 		if (adminByEmail.isPresent()) {
@@ -74,7 +75,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("login")
-	public ResponseEntity<?> authenticate(@RequestBody LoginForm form) {
+	public ResponseEntity<?> authenticate(@RequestBody @Valid LoginForm form) {
 		UsernamePasswordAuthenticationToken loginData = form.toUsernamePasswordAuthenticationToken();
 		try {
 			Authentication authentication = authManager.authenticate(loginData);
