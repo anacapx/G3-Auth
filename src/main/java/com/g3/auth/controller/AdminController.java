@@ -54,16 +54,17 @@ public class AdminController {
 	private String secret;
 
 	@GetMapping("admin/{id}")
-	public ResponseEntity<?> findAdmById(@PathVariable Long id) {
+	public ResponseEntity<AdminDTO> findAdmById(@PathVariable Long id) {
 		Optional<Admin> adminOptional = adminRepository.findById(id);
 		if (adminOptional.isPresent()) {
-			return ResponseEntity.ok(adminOptional.get());
+			AdminDTO adminDTO = new AdminDTO(adminOptional.get());
+			return ResponseEntity.ok(adminDTO);
 		}
 		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping("admin")
-	public ResponseEntity<?> signUp(@RequestBody @Valid SignUpForm form) {
+	public ResponseEntity<AdminDTO> signUp(@RequestBody @Valid SignUpForm form) {
 
 		Optional<Admin> adminByEmail = adminRepository.findByEmail(form.getEmail());
 		if (adminByEmail.isPresent()) {
@@ -75,7 +76,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("login")
-	public ResponseEntity<?> authenticate(@RequestBody @Valid LoginForm form) {
+	public ResponseEntity<TokenDTO> authenticate(@RequestBody @Valid LoginForm form) {
 		UsernamePasswordAuthenticationToken loginData = form.toUsernamePasswordAuthenticationToken();
 		try {
 			Authentication authentication = authManager.authenticate(loginData);
@@ -87,7 +88,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("validate")
-	public ResponseEntity<?> validateToken(HttpServletRequest request) {
+	public ResponseEntity<Authentication> validateToken(HttpServletRequest request) {
 		String token = request.getHeader("Authorization");
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 			return ResponseEntity.badRequest().build();
