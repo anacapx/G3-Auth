@@ -1,0 +1,1 @@
+docker build -t debrum/ilab-g3-auth -f Dockerfile .
