@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: g3-auth
+  namespace: namespace-g3
+spec:
+  selector:
+    matchLabels:
+      app: g3-auth
+  template:
+    metadata:
+      labels:
+        app: g3-auth
+    spec:
+      containers:
+        - name: g3-auth
+          image: $URL_IMG_AUTH_DOCKER
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8081
