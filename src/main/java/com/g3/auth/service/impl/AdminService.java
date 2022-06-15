@@ -97,7 +97,7 @@ public class AdminService implements IAdminService {
 		Admin user = adminRepository.findById(userId).get();
 
 		SecurityContextHolder.getContext()
-				.setAuthentication(new UsernamePasswordAuthenticationToken(user, token, user.getAuthorities()));
+				.setAuthentication(new UsernamePasswordAuthenticationToken(user.getId(), null, user.getAuthorities()));
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null) {
