@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.g3.auth.controller.dto.AdminDTO;
 import com.g3.auth.model.Admin;
 import com.g3.auth.repository.AdminRepository;
 
@@ -53,7 +54,7 @@ public class TokenBasedAuthenticationFilter extends OncePerRequestFilter {
 		
 		SecurityContextHolder
 			.getContext()
-			.setAuthentication(new UsernamePasswordAuthenticationToken(user, token, user.getAuthorities()));
+			.setAuthentication(new UsernamePasswordAuthenticationToken(user.getId(), null, user.getAuthorities()));
 	}
 
 }

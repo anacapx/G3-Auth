@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.g3.auth.controller.dto.AdminDTO;
 import com.g3.auth.model.Admin;
 
 import io.jsonwebtoken.Claims;
@@ -23,12 +24,13 @@ public class TokenService {
 	
 	public String generateToken(Authentication authentication) {
 		Admin loggedAdmin = (Admin) authentication.getPrincipal();
+		AdminDTO loggedAdminDTO = new AdminDTO(loggedAdmin);
 		Date today = new Date();
 		Date expirationDate = new Date(today.getTime() + Long.parseLong(expiration));
 		
 		return Jwts.builder()
 				.setIssuer("G3 - Auth API")
-				.setSubject(loggedAdmin.getId().toString())
+				.setSubject(loggedAdminDTO.getId().toString())
 				.setIssuedAt(today)
 				.signWith(SignatureAlgorithm.HS256, secret)
 				.setExpiration(expirationDate)
