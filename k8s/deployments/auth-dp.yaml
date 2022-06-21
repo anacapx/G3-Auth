@@ -12,12 +12,29 @@ spec:
       labels:
         app: g3-auth
     spec:
+      replicas: 2
       containers:
         - name: g3-auth
-          image: $URL_IMG_AUTH_DOCKER
+          image: carolamaral/auth-ilab-g3:latest
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-auth
+                  key: DB_USERNAME
+            - name: DB_URL_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-auth
+                  key: DB_URL_AUTH
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-auth-g3
+                  key: DB_PASSWORD
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
