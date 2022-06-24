@@ -4,6 +4,7 @@ metadata:
   name: g3-auth
   namespace: namespace-g3
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: g3-auth
@@ -14,10 +15,31 @@ spec:
     spec:
       containers:
         - name: g3-auth
-          image: $URL_IMG_AUTH_DOCKER
+          image: carolamaral/auth-ilab-g3:latest
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-auth
+                  key: DB_USERNAME
+            - name: DB_URL_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: g3-configmap-auth
+                  key: DB_URL_AUTH
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-auth-g3
+                  key: DB_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-auth-g3
+                  key: JWT_SECRET
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "4Gi"
+              cpu: "1"
           ports:
             - containerPort: 8081
