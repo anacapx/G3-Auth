@@ -31,18 +31,17 @@ Consiste em um sistema que permite ao administrador, devidamente autenticado e a
 
 Tecnologias que utilizamos para desenvolver esta API Rest:
 
-- Java 
+- [Java](https://www.java.com/pt-BR/) 
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Security](https://spring.io/projects/spring-security)
 - [JWT](https://jwt.io/)
 - [Swagger](https://swagger.io/)
-- Apache HttpClient
-- PostgreSQL 
-- Swagger 
-- Kafka 
-- JUnit 
-- Mockito 
-- New Relic 
+- [Apache HttpClient](https://hc.apache.org/httpcomponents-client-5.1.x/)
+- [PostgreSQL](https://www.postgresql.org/) 
+- [Kafka](https://kafka.apache.org/) 
+- [JUnit](https://junit.org/junit5/) 
+- [Mockito](https://site.mockito.org/) 
+- [New Relic](https://newrelic.com/) 
 - [Docker](https://www.docker.com/)
 - [Kubernetes](https://kubernetes.io/pt-br/docs/concepts/overview/what-is-kubernetes/)
 - [GitLab](https://gitlab.com/)
@@ -92,7 +91,7 @@ Tudo pronto! A aplicação está rodando e pode receber requisições.
 
 ## ⚙️ Funcionalidades
 Funcionalidades que o sistema oferece:
-- Rota de Login
+- Rota de Login com Geração de Token
 - Rota de Validação do Token
 - Rota de Cadastro de Admin
 - Rota de Buscar Admin Por ID
